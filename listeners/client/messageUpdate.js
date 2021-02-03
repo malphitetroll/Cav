@@ -49,16 +49,7 @@ module.exports = class MessageUpdateListener extends Listener {
          newMessage.guild.updateLastUser(newMessage, 'none');
 
          // push to the buffer and remove old messages
-         var buffer = this.client.db.get(newMessage.guild.id,'messages.buffer')
-         var length = await buffer.push(msg.id);
-
-         if (length > settings.messages.bufferLimit) {
-           var oldValue = await buffer.shift();
-           var oldMsg = await channel.messages.cache.get(oldValue);
-           if (!oldMsg) return;
-           oldMsg.delete().catch(O_o => {});
-         }
-         this.client.db.set(newMessage.guild.id, buffer, 'messages.buffer')
+         
       });
       }
       } 
